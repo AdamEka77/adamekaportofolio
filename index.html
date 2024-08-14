@@ -135,60 +135,35 @@
           <div class="col-md-4 mb-3">
             <div class="card">
               <img
-                src="img/keyboard1.jpg"
+                src="img/loremscene.jpeg"
                 class="card-img-top"
                 alt="Keyboard"
               />
               <div class="card-body">
+                <h5 class="card-title">LoremScene</h5>
                 <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                  Website berita dan artikel yang membahas konten-konten pop
+                  culture yang sedang tren.
                 </p>
+                <a href="#" class="btn btn-primary">Buka Web</a>
               </div>
             </div>
           </div>
           <div class="col-md-4 mb-3">
             <div class="card">
-              <img
-                src="img/keyboard2.jpg"
-                class="card-img-top"
-                alt="Keyboard"
-              />
+              <img src="img/larry.jpeg" class="card-img-top" alt="Keyboard" />
               <div class="card-body">
+                <h5 class="card-title">Larry Rent Car</h5>
                 <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                  Website Rental mobil dengan harga yang terjangkau, dan dengan
+                  kualitas terjamin
                 </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <div class="card">
-              <img
-                src="img/keyboard3.jpg"
-                class="card-img-top"
-                alt="Keyboard"
-              />
-              <div class="card-body">
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <div class="card">
-              <img
-                src="img/keyboard2.jpg"
-                class="card-img-top"
-                alt="Keyboard"
-              />
-              <div class="card-body">
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
+                <a
+                  href="https://adameka77.github.io/LarryRentCar/"
+                  class="btn btn-primary"
+                  target="_blank"
+                  >Buka Web</a
+                >
               </div>
             </div>
           </div>
@@ -200,10 +175,46 @@
                 alt="Keyboard"
               />
               <div class="card-body">
+                <h5 class="card-title">Card title</h5>
                 <p class="card-text">
                   Some quick example text to build on the card title and make up
                   the bulk of the card's content.
                 </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <img
+                src="img/keyboard2.jpg"
+                class="card-img-top"
+                alt="Keyboard"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <img
+                src="img/keyboard3.jpg"
+                class="card-img-top"
+                alt="Keyboard"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
               </div>
             </div>
           </div>
@@ -234,6 +245,18 @@
               role="alert"
             >
               <strong>Terimakasih</strong> Pesan anda sudah kami terima.
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div
+              class="alert alert-danger alert-dismissible fade show d-none error-alert"
+              role="alert"
+            >
+              <strong>Error!</strong> Terjadi kesalahan saat mengirimkan form.
               <button
                 type="button"
                 class="btn-close"
@@ -332,18 +355,40 @@
         //tampilan tombol loading, hilangkan tombol kirim
         btnLoading.classList.toggle("d-none");
         btnKirim.classList.toggle("d-none");
-        fetch(scriptURL, { method: "POST", body: new FormData(form) })
-          .then((response) => {
-            //tampilan tombol kirim, hilangkan tombol loading
-            btnLoading.classList.toggle("d-none");
-            btnKirim.classList.toggle("d-none");
-            //tampilkan alert
-            myAlert.classList.toggle("d-none");
-            //reset formnya
-            form.reset();
-            console.log("Success!", response);
-          })
-          .catch((error) => console.error("Error!", error.message));
+        try {
+          fetch(scriptURL, { method: "POST", body: new FormData(form) })
+            .then((response) => {
+              //tampilan tombol kirim, hilangkan tombol loading
+              btnLoading.classList.toggle("d-none");
+              btnKirim.classList.toggle("d-none");
+              //tampilkan alert
+              myAlert.classList.toggle("d-none");
+              //reset formnya
+              form.reset();
+              console.log("Success!", response);
+            })
+            .catch((error) => {
+              //tampilan tombol kirim, hilangkan tombol loading
+              btnLoading.classList.toggle("d-none");
+              btnKirim.classList.toggle("d-none");
+              //tampilkan alert error
+              const errorAlert = document.querySelector(".error-alert");
+              errorAlert.classList.toggle("d-none");
+              //reset formnya
+              form.reset();
+              console.error("Error!", error.message);
+            });
+        } catch (error) {
+          //tampilan tombol kirim, hilangkan tombol loading
+          btnLoading.classList.toggle("d-none");
+          btnKirim.classList.toggle("d-none");
+          //tampilkan alert error
+          const errorAlert = document.querySelector(".error-alert");
+          errorAlert.classList.toggle("d-none");
+          //reset formnya
+          form.reset();
+          console.error("Error!", error.message);
+        }
       });
     </script>
   </body>
